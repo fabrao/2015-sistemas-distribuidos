@@ -1,0 +1,129 @@
+Este trabalho tem como objetivo simular o funcionamento de uma Rede de Sensores Sem Fio
+
+1 - Como executar o projeto
+
+Framework Config:
+	
+	a)Simulation Area:
+		Deve definir a area de simulação em 2 dimensões
+		As Dimensões X e Y devem ser 1000
+		
+	b)Simulation:
+		A simulação deve ser executada de forma Síncrona
+		Deve ser configurado sem mobilidade
+		Tem a possibilidade de ativar ou não a interfêrencia
+		
+	c)Models:
+		Definir InterferenciaAleatoria como modelo padrão de interferencia
+		
+	d)Outros:
+		Os outros parametros não devem ser alterados
+
+Project Config
+		Não deve alterar os parametros
+		
+Após essas configurações deve-se executar o projeto
+
+2 - Como executar a simulação
+
+	a)Criar Sinks:
+		Para iniciar a simulação deve-se criar novos nós do tipo Sink (Circulos Azuis)
+		Deve-se criar de 1 a 4 nós desse tipo
+		Deve-se utilizar o modelo de distribuição DistribuicaoSinks
+		Utilizar o modelo de interferencia InterferenciaAleatória
+		Os outros parametros devem ser:
+			UDG
+			NoMobility
+			ReliableDelivery
+			
+	b)Criar Sensores:
+		Após a criação dos Sinks, deve-se criar novo nós do tipo Sensores (Pontos Escuros)
+		Deve-se criar 300 sensores
+		Utilizar modelo de distribuição Random ou Grid2D
+		Utilizar o modelo de interferencia InterferenciaAleatória
+		Os outros parametros devem ser:
+			UDG
+			NoMobility
+			ReliableDelivery
+			
+	c) Executar a simulação
+		Após a criação dos nós deve-se clicar em Run para iniciar a simulação
+		
+	d)Enviar mensagem ao Sink
+		Além das mensagens já executadas e geradas na implementação, é possível realizar o envio de mensagens ao Sink por interação do usuário
+		Para isso basta clicar com o botão direito do mouse sobre um Sensor e escolher a opção de enviar mensagem ao Sink
+		Só envie mensagens ao Sink se já estiver definida as rotas (Mensagens azuis) ou tiver mensagens de dados (Mensagens amarelas) sendo percorridas
+		na simulação
+		
+	e)Dados da Simulação
+		Por meio da interação do usuário, é possível realizar a coleta de dados da simulação
+		Basta clicar com o botão direito sobre um Sink (Circulos Azuis) e escolher a opção de Dados da Simulação
+		
+		Pode-se observar os dados coletados da simulação no quadro ao lado esquerdo, onde podemos ver:
+			Número total de Mensagens de Dados enviadas
+			Número total de Mensagens de Dados recebidas
+			Sensores Ativos
+			Energia Total Consumida
+			Taxa de Mensagens Recebidas por Mensagens Enviadas
+			Porcentagem de Sensores Ativos
+			Taxa de Energia Consumida por Mensagens Recebidas
+
+3 - Classe Configuracoes
+
+	Classe utilizada para realizar diversas configurações fundamentais para a execução do framework
+
+	pcInterferencia - Configuração da porcentagem de mensagens que sofrem interferencia
+	
+	tempoRota - Configura o tempo que cada Sink espera para realizar um	novo roteamento
+	
+	qntEnergia - Quantidade de energia contida na bateria de cada Sensor
+	
+	consumoEnvia - Consumo de energia gasto da bateria de um Sensor ao enviar cada mensagem
+	
+	consumoRecebe - Consumo de energia gasto da bateria de um Sensor ao	receber cada mensagem
+	
+	consumoLigado - Consumo de energia gasto da bateria de uma Sensor ao estar ligado
+	
+	minEspera - Tempo minimo de espera que pode ser gerado para que um Sensor espera para enviar uma nova mensagem de dados
+	
+	maxEspera - Tempo máximo de espera que pode ser gerado para que um Sensor espera para enviar uma nova mensagem de dados
+	
+	esperaRotaSensor - tempo máximo que um Sensor é considerado ativo, sem que este receba um novo pacote de roteamento
+	
+	minTemperatura - Temperatura mínima que pode ser gerada por um sensor para ser enviada por uma mensagem de dados
+	
+	maxTemperatura - Temperatura máxima que pode ser gerada por um sensor para ser enviada por uma mensagem de dados
+	
+	minUmidade - Valor de umidade mínima que pode ser gerada por um sensor para ser enviada por uma mensagem de dados
+	
+	maxUmidade  - Valor de umidade mínima que pode ser gerada por um sensor para ser enviada por uma mensagem de dados
+
+4 - Descrição
+
+	Esta é uma simulação de uma Rede de Sensores Sem Fio
+	
+	Os Sinks são os nós responsáveis por criarem as rotas entre os sensores, para que a partir desta os mesmos possam enviar mensagens
+	Estes Sinks são distribuidos na metade das linhas laterais
+	
+	Devido a este roteamento e a comunicação entre os sensores, possibilite que estem enviem as mensagens a um Sink, que funciona neste caso como receptor
+	de dados
+
+	Nesta simulação é considerada uma interferencia aleatória, baseada na classe de configuração
+
+5 - Interface do Usuário
+
+	Os Sinks são os circulos maiores azuis
+	
+	Os Sensores quando ativos são pequenos circulos pretos
+	Quando desativados por falta de energia ou rota são pequenos circulos vermelhos
+	
+	Os envelopes azuis são as mensagens de definição de rotas
+	
+	Os envelopes amarelos são as mensagens de dados
+	
+	Os traços entre cada par de nós, quando os mesmo estão proximos são as conexões entre os nós
+	Quando estas estão pretas, estão em estado ocioso
+	Quando estas estão vermelhas signfica que haverá a transmissão de uma mensagem por aquela conexão
+	
+	No quadro de Output quando um Sink recebe uma mensagem de dados é mostrado os valores da temperatura e umidade relativa de um determinado Sensor,
+	o qual enviou a mensagem de dados
